@@ -1,0 +1,92 @@
+#!/bin/sh
+# -*- coding: utf-8 -*-
+# /etc/init.d/ligth-switch-startup
+# ----------------------------------------------------------------------
+#
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE.txt', which is part of this source code package.
+#
+#   ----------------------------------------------------------------------
+#
+# File: light-switch-startup
+#
+# Last modified: 21/05-2015
+#
+# Description:
+#   init.d file, that starts @reboot and launches Light Switch app
+#
+# Authors:
+#   Lars Erik Midtsundstad Storbukås <larserik.storbukas@gmail.com>
+#   Ole Eirik Heggelund <oeheggel@gmail.com>
+#
+# Website:
+#   http://storbukas.no/lightswitch
+#
+# ----------------------------------------------------------------------
+
+### BEGIN INIT INFO
+# Provides:          lightswitch
+# Required-Start:    $local_fs $network $named $time $syslog
+# Required-Stop:     $local_fs $network $named $time $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Description:       Light Switch Home Automation
+### END INIT INFO
+ 
+SCRIPT=/opt/lightswitch/lightswitch.sh
+RUNAS=root
+ 
+PIDFILE=/var/run/lightswitch.pid
+LOGFILE=/var/log/lightswitch.log
+ 
+start() {
+  if [ -f /var/run/$PIDNAME ] && kill -0 $(cat /var/run/$PIDNAME); then
+    echo 'Service already running' >&2
+    return 1
+  fi
+  echo 'Starting service…' >&2
+  local CMD="$SCRIPT &> \"$LOGFILE\" & echo \$!"
+  su -c "$CMD" $RUNAS > "$PIDFILE"
+  echo 'Service started' >&2
+}
+ 
+stop() {
+  if [ ! -f "$PIDFILE" ] || ! kill -0 $(cat "$PIDFILE"); then
+    echo 'Service not running' >&2
+    return 1
+  fi
+  echo 'Stopping service…' >&2
+  kill -15 $(cat "$PIDFILE") && rm -f "$PIDFILE"
+  echo 'Service stopped' >&2
+}
+ 
+uninstall() {
+  echo -n "Are you really sure you want to uninstall this service? That cannot be undone. [yes|no] "
+  local SURE
+  read SURE
+  if [ "$SURE" = "yes" ]; then
+    stop
+    rm -f "$PIDFILE"
+    echo "Notice: log file is not be removed: '$LOGFILE'" >&2
+    update-rc.d -f lightswitch remove
+    rm -fv "$0"
+  fi
+}
+ 
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  uninstall)
+    uninstall
+    ;;
+  retart)
+    stop
+    start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|uninstall}"
+esac

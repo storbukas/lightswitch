@@ -1,0 +1,17 @@
+A settings-row in the SETTINGS-file looks like this
+
+	1-2|0|0700|less|OFF|else
+
+Lets write that as a text representation, to make it more understandable:
+
+	OUTPUT_PINS | INPUT_PIN | INPUT_PIN_VALUE | RELATION_TO_INPUT_PIN_VALUE | ACTION_IF_RELATION_MATCHES | OPTIONAL_ACTION_IF_RELATION_NOT_MATCHES
+
+
+Here is some examples with explaination:
+
+	1|12|22.4|less|ON|else			--> if value on sensor 12 drops below value 22.4, pin 1 is being turned ON, otherwise, pin 1 should be OFF.
+										like for example a heating element/oven that turns on if the degrees is dropping below 22.4
+
+	2-4|0|0700|more|ON|not-set		--> if value on sensor 0 is more than value 0700, pins 2,3 and 4 (2-4) should be turned on (does not specify what
+										should happen if it's less than 0700). examples are light than should be turned of in the morning, and then
+										the user decides self when to turn them off again.

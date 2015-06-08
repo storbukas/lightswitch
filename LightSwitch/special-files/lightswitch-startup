@@ -1,0 +1,42 @@
+#!/bin/bash
+# -*- coding: utf-8 -*-
+# /etc/init.d/light-switch-startup
+#	----------------------------------------------------------------------
+#
+#	This file is subject to the terms and conditions defined in
+#	file 'LICENSE.txt', which is part of this source code package.
+#
+#   ----------------------------------------------------------------------
+#
+#	File: light-switch-startup
+#
+#	Last modified: 21/05-2015
+#
+#	Description:
+#		init.d file, that starts @reboot and launches Light Switch app
+#
+#	Authors:
+#		Lars Erik Midtsundstad Storbukås <larserik.storbukas@gmail.com>
+#		Ole Eirik Heggelund	<oeheggel@gmail.com>
+#
+#	Website:
+#		http://storbukas.no/lightswitch
+#
+#	----------------------------------------------------------------------
+
+case "$1" in
+	start)
+		echo "Starting light switch"
+		/opt/lightswitch/lightswitch.sh
+		;;
+	stop)
+		echo "Stopping light switch"
+		killall lightswitch.sh
+		;;
+	*)
+		echo "Usage: /etc/init.d/light-switch-startup start|stop"
+		exit 1
+		;;
+esac
+
+exit 0

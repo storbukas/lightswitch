@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Light Switch</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Change IP</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="close_connection">Reset</string>
+    <string name="title">IP</string>
+    <string name="comment">Settings</string>
+    <string name="ok">Update</string>
+    <string name="cancel">Cancel</string>
+</resources>

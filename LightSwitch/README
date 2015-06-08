@@ -1,0 +1,32 @@
+#	----------------------------------------------------------------------
+#
+#	This file is subject to the terms and conditions defined in
+#	file 'LICENSE.txt', which is part of this source code package.
+#
+#   ----------------------------------------------------------------------
+#
+#	File: README
+#
+#	Last modified: 07/06-2015
+#
+#	Authors:
+#		Lars Erik Midtsundstad Storbukås <larserik.storbukas@gmail.com>
+#		Ole Eirik Heggelund <oeheggel@gmail.com>
+#
+#	Website:
+#		http://storbukas.no/lightswitch
+#
+#	----------------------------------------------------------------------
+
+Disclaimer: This software is designed for use in a Raspberry Pi (with GPIO's)
+
+Install: To install LightSwitch for use as a home automation, follow the steps
+		described in the 'Project_procedure[EN].pdf' file, which goes trough
+		alle the neccesary steps to get the system to work.
+
+		Alternatively you could run the 'install' file from the command line:
+			'sudo ./install'
+		Though this is not fully tested, and should be used with care.
+
+Contact: Get in touch with us trough the project website at
+			http://storbukas.no/lightswitch
